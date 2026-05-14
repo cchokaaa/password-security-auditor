@@ -6,11 +6,11 @@ A professional password auditing tool that evaluates password strength using rul
 
 ## Features
 
-- Rule-based password strength analysis
-- Shannon entropy calculation
-- Common password dictionary check
-- Have I Been Pwned breach detection
-- Batch auditing from a text file
+- Password Strength Analysis
+- Shannon Entropy Calculation
+- Common Password Dictionary Check
+- Have I Been Pwned Breach Detection (K-Anonymity)
+- Batch Audit
 - JSON report export
 - Modular Python architecture
 
@@ -34,22 +34,22 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Analyze a Single Password
+### Single password check
 
 ```bash
 python main.py "Password123!"
 ```
 
-### Export JSON Report
-
-```bash
-python main.py "Password123!" --json report.json
-```
-
-### Batch Audit
+### Batch audit from file
 
 ```bash
 python main.py --file sample/passwords.txt
+```
+
+### Export JSON report
+
+```bash
+python main.py "Password123!" --json report.json
 ```
 
 ---
@@ -80,7 +80,11 @@ This provides an estimate of the theoretical password search space.
 
 ### 3. Common Password Dictionary Check
 
-The password is compared against a local dictionary of known weak passwords stored in `sample/common_passwords.txt`.
+The password is compared against a local dictionary of known weak passwords stored in:
+
+```text
+sample/common_passwords.txt
+```
 
 ### 4. Have I Been Pwned Breach Detection
 
@@ -108,6 +112,7 @@ password-security-auditor/
 ├── report_generator.py
 │
 ├── README.md
+├── LICENSE
 ├── requirements.txt
 ├── .gitignore
 │
@@ -123,28 +128,45 @@ password-security-auditor/
 ```text
 Password: Password123!
 Strength: Strong
-Entropy: 78.66 bits (Strong)
+Entropy: 78.4 bits
 Dictionary Match: No
 Breached: Yes (12543 times)
---------------------------------------------------
+Recommendations:
+- Consider using a password manager.
+```
+
+---
+
+## JSON Output Example
+
+```json
+{
+  "password": "Password123!",
+  "score": 5,
+  "strength": "Strong",
+  "entropy": 78.4,
+  "entropy_rating": "Strong",
+  "dictionary_match": false,
+  "breached": true,
+  "breach_count": 12543,
+  "recommendations": []
+}
 ```
 
 ---
 
 ## Skills Demonstrated
 
-- Python
-- Cybersecurity
 - Password Security
-- Shannon Entropy
+- Information Theory
 - K-Anonymity
+- Threat Intelligence
 - REST API Integration
-- JSON Serialization
-- CLI Development
-- Modular Software Design
+- Python Engineering
+- JSON Reporting
 
 ---
 
 ## License
 
-This project is for educational and portfolio purposes.
+This project is licensed under the MIT License. See the LICENSE file for details.
